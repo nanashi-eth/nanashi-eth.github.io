@@ -1,0 +1,110 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #292d3e;
+    color: #a6accd;
+    animation: fadeIn 1s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+header, section, footer {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+h1, h2, p {
+    text-align: center;
+    color: #c792ea;
+}
+
+#projects, #cybersecurity, #testimonials {
+    border-top: 1px solid #444267;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #292d3e;
+    text-align: center;
+    padding: 10px 0;
+    animation: slideUp 1s;
+}
+
+@keyframes slideUp {
+    0% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+
+/* Tu código CSS existente aquí */
+
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #333755;
+    padding: 30px;
+    border-radius: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #a6accd;
+    border-radius: 4px;
+    background-color: #292d3e;
+    color: #a6accd;
+}
+
+input[type="submit"] {
+    width: 100%;
+    background-color: #c792ea;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+input[type="submit"]:hover {
+    background-color: #a371f7;
+}
+
+
+/* Tu código CSS existente aquí */
+
+#social-media {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.social-icons a {
+    display: inline-block;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #c792ea;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    margin: 0 10px;
+}
+
+.social-icons a:hover {
+    background-color: #a371f7;
+}
