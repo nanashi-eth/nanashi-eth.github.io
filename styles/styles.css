@@ -29,16 +29,6 @@ h1, h2, p {
     margin-top: 20px;
 }
 
-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #292d3e;
-    text-align: center;
-    padding: 10px 0;
-    animation: slideUp 1s;
-}
-
 @keyframes slideUp {
     0% {
         transform: translateY(100%);
@@ -49,15 +39,28 @@ footer {
 }
 
 
-/* Tu código CSS existente aquí */
-
+/* Estilo existente del formulario */
 form {
     max-width: 400px;
     margin: 0 auto;
     background-color: #333755;
-    padding: 30px;
+    padding: 20px 40px 20px 30px;
     border-radius: 5px;
+    margin-bottom: 60px; /* Se añade margen inferior para evitar superposición con el footer */
 }
+
+/* Estilo del footer */
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #292d3e;
+    text-align: center;
+    padding: 10px 0;
+    z-index: 1; /* Añadido z-index para asegurarse de que el footer esté sobre el formulario */
+    animation: slideUp 1s;
+}
+
 
 input[type="text"],
 input[type="email"],
@@ -107,4 +110,33 @@ input[type="submit"]:hover {
 
 .social-icons a:hover {
     background-color: #a371f7;
+}
+
+
+.hero {
+    background-image: url('../assets/nanashi.jfif'); /* Reemplaza con tu imagen de fondo */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+}
+
+.hero h1 {
+    color: #c792ea;
+    margin: 0;
+    font-size: 2em;
+    animation: fadeIn 1s;
+}
+
+
+.pen {
+    width: 50px;
+    height: 50px;
+    background-color: #c792ea; /* Color del ícono de pluma */
+    transform-origin: top center;
+    transition: transform 0.5s ease;
 }
