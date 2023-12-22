@@ -1,66 +1,61 @@
-document.addEventListener("DOMContentLoaded", function () {
-  var footer = document.querySelector("footer");
-  footer.style.visibility = "hidden";
+$(document).ready(function () {
+  var $footer = $("footer");
+  $footer.css("visibility", "hidden");
 
-  var hero = document.querySelector(".hero");
-  var description = document.querySelector(".description");
-  var heroContent = document.querySelector(".hero-content");
-  var logo = document.querySelector(".developer-logo");
-  var h1 = document.querySelector(".hero h1");
-  var technologyIcons = document.querySelector(".technology-icons");
-  var h2Title = document.querySelector("#technologies h2");
-  hero.classList.add("active");
-
-
+  var $hero = $(".hero");
+  var $description = $(".description");
+  var $logo = $(".developer-logo");
+  var $h1 = $(".hero h1");
+  var $technologyIcons = $(".technology-icons");
+  $hero.addClass("active");
 
   function updateScroll() {
-    var scrollPosition = window.scrollY;
-    var heroHeight = document.querySelector(".hero").offsetHeight;
+    var scrollPosition = $(window).scrollTop();
+    var heroHeight = $(".hero").outerHeight();
 
     if (scrollPosition > heroHeight / 2) {
-      footer.style.visibility = "visible";
+      $footer.css("visibility", "visible");
     } else {
-      footer.style.visibility = "hidden";
+      $footer.css("visibility", "hidden");
     }
 
-    var descriptionOffset = description.offsetTop - window.innerHeight + 100;
-    var hideDescriptionOffset = description.offsetTop + description.clientHeight ;
+    var descriptionOffset =
+      $description.offset().top - $(window).height() + 100;
+    var hideDescriptionOffset =
+      $description.offset().top + $description.outerHeight();
 
-    if (scrollPosition > descriptionOffset && scrollPosition < hideDescriptionOffset) {
-      fadeIn(description);
-      fadeIn(description);
+    if (
+      scrollPosition > descriptionOffset &&
+      scrollPosition < hideDescriptionOffset
+    ) {
+      fadeIn($description);
     } else {
-      fadeOut(description);
-      fadeOut(description);
+      fadeOut($description);
     }
 
-    var scrollPosition = window.scrollY;
-    var technologiesOffset = technologyIcons.offsetTop - window.innerHeight + 100;
+    var technologiesOffset =
+      $technologyIcons.offset().top - $(window).height() + 100;
 
     if (scrollPosition > technologiesOffset) {
-      technologyIcons.classList.add("active");
+      $technologyIcons.addClass("active");
     } else {
-    technologyIcons.classList.remove("active");
-  }
+      $technologyIcons.removeClass("active");
+    }
 
-    // Parallax effect
-    document.querySelector(".hero").style.backgroundPositionY =
-      scrollPosition * 0.5 + "px";
+    $(".hero").css("background-position-y", scrollPosition * 0.5 + "px");
 
-    // Rotation effect
     var scrollProgress =
-      scrollPosition / (document.body.scrollHeight - window.innerHeight);
+      scrollPosition / ($(document).height() - $(window).height());
     var rotation = 360 * scrollProgress;
-    document.querySelector(".pen").style.transform = `rotate(${rotation}deg)`;
-    document.querySelector(".pen1").style.transform = `rotate(${-rotation}deg)`;
+    $(".pen").css("transform", "rotate(" + rotation + "deg)");
+    $(".pen1").css("transform", "rotate(" + -rotation + "deg)");
 
-    // Animación de entrada y salida para el logo y h1
     if (scrollPosition > heroHeight / 7) {
-      fadeOut(logo);
-      fadeOut(h1);
-    } else if (scrollPosition == 0){
-      fadeIn(logo);
-      fadeIn(h1);
+      fadeOut($logo);
+      fadeOut($h1);
+    } else if (scrollPosition === 0) {
+      fadeIn($logo);
+      fadeIn($h1);
     }
   }
 
@@ -68,29 +63,24 @@ document.addEventListener("DOMContentLoaded", function () {
     requestAnimationFrame(updateScroll);
   }
 
-  window.addEventListener("scroll", scrollHandler);
+  $(window).scroll(scrollHandler);
 
-  // Función para animación de entrada
   function fadeIn(element) {
-    element.style.opacity = 0;
-    element.style.transition = "opacity 0.5s ease-in-out";
-    setTimeout(() => {
-      element.style.opacity = 1;
+    element.css({ opacity: 0, transition: "opacity 0.5s ease-in-out" });
+    setTimeout(function () {
+      element.css("opacity", 1);
     }, 0);
   }
 
-  // Función para animación de salida
   function fadeOut(element) {
-    element.style.opacity = 1;
-    element.style.transition = "opacity 0.5s ease-in-out";
-    setTimeout(() => {
-      element.style.opacity = 0;
+    element.css({ opacity: 1, transition: "opacity 0.5s ease-in-out" });
+    setTimeout(function () {
+      element.css("opacity", 0);
     }, 0);
   }
 
-  var projectCards = document.querySelectorAll(".project-card");
+  var $projectCards = $(".project-card");
 
-  // Objeto que almacena información sobre cada proyecto, incluyendo los enlaces a los repositorios
   var projectsData = {
     1: {
       name: "Employee App",
@@ -107,14 +97,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // Agrega más información según sea necesario
   };
 
-  function redirectToGitHub(event) {
-    var projectId = event.currentTarget.getAttribute("data-project-id");
+  function redirectToGitHub() {
+    var projectId = $(this).data("project-id");
     var githubURL = projectsData[projectId].githubLink;
     window.location.href = githubURL;
   }
 
-  projectCards.forEach(function (card) {
-    card.addEventListener("click", redirectToGitHub);
-  });
-
+  $projectCards.click(redirectToGitHub);
 });
