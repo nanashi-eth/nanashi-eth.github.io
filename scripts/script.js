@@ -13,7 +13,7 @@ $(document).ready(function () {
     var scrollPosition = $(window).scrollTop();
     var heroHeight = $(".hero").outerHeight();
 
-    if (scrollPosition > heroHeight / 2) {
+    if (scrollPosition > heroHeight / 2 + 100) {
       $footer.css("visibility", "visible");
     } else {
       $footer.css("visibility", "hidden");
@@ -21,8 +21,7 @@ $(document).ready(function () {
 
     var descriptionOffset =
       $description.offset().top - $(window).height() + 100;
-    var hideDescriptionOffset =
-      $description.offset().top + $description.outerHeight();
+    var hideDescriptionOffset = heroHeight / 2 + 130;
 
     if (
       scrollPosition > descriptionOffset &&

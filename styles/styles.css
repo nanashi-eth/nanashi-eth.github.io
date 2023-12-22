@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'Cascadia Code';
+    src: url('https://fonts.googleapis.com/css2?family=Cascadia+Code&display=swap');
+    /* Puedes agregar otras variantes de la fuente (negrita, cursiva, etc.) si es necesario */
+}
+
 /* Reset CSS básico */
 * {
     margin: 0;
@@ -5,16 +11,51 @@
     box-sizing: border-box;
 }
 
+img {
+    pointer-events: none;
+    /* Evita el arrastre de imágenes */
+    user-select: none;
+    /* Evita la selección de texto */
+    -moz-user-select: none;
+    /* Evita la selección de texto en navegadores basados en Gecko, como Firefox */
+    -webkit-user-drag: none;
+    /* Evita el arrastre de imágenes en navegadores basados en WebKit, como Chrome y Safari */
+    -webkit-user-select: none;
+    /* Evita la selección de texto en navegadores basados en WebKit, como Chrome y Safari */
+}
+
+p,
+h3,
+h1,
+h2 {
+    user-select: none;
+    /* Evita la selección de texto */
+    -moz-user-select: none;
+    /* Evita la selección de texto en navegadores basados en Gecko, como Firefox */
+    -webkit-user-select: none;
+    /* Evita la selección de texto en navegadores basados en WebKit, como Chrome y Safari */
+}
+
 body {
+    overflow-x: hidden;
     font-family: 'Arial', sans-serif;
     background-color: #292d3e;
     color: #a6accd;
     animation: fadeIn 1s;
 }
 
+header {
+    width: 100vw;
+}
+
 @keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 @keyframes fadeInUp {
@@ -22,6 +63,7 @@ body {
         opacity: 0;
         transform: translateY(20px);
     }
+
     100% {
         opacity: 1;
         transform: translateY(0);
@@ -34,11 +76,14 @@ body {
     padding: 20px 0;
 }
 
-section, footer {
+section,
+footer {
     padding: 20px 0;
 }
 
-h1, h2, p {
+h1,
+h2,
+p {
     text-align: center;
     color: #c792ea;
     margin-bottom: 40px;
@@ -64,12 +109,14 @@ form {
 footer {
     position: fixed;
     bottom: 0;
+    height: 5%;
     width: 100%;
     background-color: #292d3e;
     text-align: center;
     padding: 10px 0;
     z-index: 1;
     animation: slideUp 1s;
+    font-family: 'Cascadia Code', monospace;
 }
 
 /* Estilo de los campos del formulario */
@@ -88,7 +135,7 @@ textarea {
 /* Estilo del botón de enviar */
 input[type="submit"] {
     width: 100%;
-    background-color: #c792ea;
+    background-color: #a371f7;
     color: #fff;
     padding: 12px;
     border: none;
@@ -98,7 +145,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #a371f7;
+    background-color: #c792ea;
 }
 
 /* Estilo de enlaces sociales */
@@ -132,7 +179,8 @@ input[type="submit"]:hover {
     justify-content: center;
     text-align: center;
     position: relative;
-    overflow: hidden; /* Añadido para ocultar el desplazamiento horizontal en el parallax */
+    overflow: hidden;
+    /* Añadido para ocultar el desplazamiento horizontal en el parallax */
 }
 
 .hero-content {
@@ -143,8 +191,10 @@ input[type="submit"]:hover {
 }
 
 .developer-logo {
-    width: 200px; /* Ajusta el tamaño según tus preferencias */
-    margin-right: 10px; /* Espaciado entre el logo y el texto */
+    width: 200px;
+    /* Ajusta el tamaño según tus preferencias */
+    margin-right: 10px;
+    /* Espaciado entre el logo y el texto */
 }
 
 
@@ -152,23 +202,37 @@ input[type="submit"]:hover {
     font-family: 'Roboto', sans-serif;
     color: #c792ea;
     margin: 0;
-    font-size: 3em; /* Aumenté el tamaño del texto para hacerlo más llamativo */
-    font-weight: bold; /* Añadí negrita para mayor énfasis */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); /* Añadí sombra para resaltar el texto */
+    font-size: 3em;
+    /* Aumenté el tamaño del texto para hacerlo más llamativo */
+    font-weight: bold;
+    /* Añadí negrita para mayor énfasis */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    /* Añadí sombra para resaltar el texto */
 }
 
 .description {
-    display: none; /* Oculta la descripción inicialmente */
+    display: none;
+    width: fit-content;
+    text-align: justify;
+    /* Oculta la descripción inicialmente */
     color: #fff;
     font-size: 1.2em;
+    font-family: 'Cascadia Code', monospace;
     animation: fadeIn 1s;
-    background-color: rgba(41, 45, 62, 0.5); /* Fondo translúcido con un 70% de opacidad */
-    padding: 20px; /* Ajusta según tu preferencia */
-    border-radius: 10px; /* Añadido para esquinas redondeadas */
-    backdrop-filter: blur(8px); /* Efecto de desenfoque */
-    max-width: 900px; /* Ajusta el valor según tu preferencia */
-    margin-left: auto; /* Centra el elemento horizontalmente */
-    margin-right: auto; /* Centra el elemento horizontalmente */
+    background-color: rgba(41, 45, 62, 0.5);
+    /* Fondo translúcido con un 70% de opacidad */
+    padding: 20px;
+    /* Ajusta según tu preferencia */
+    border-radius: 10px;
+    /* Añadido para esquinas redondeadas */
+    backdrop-filter: blur(8px);
+    /* Efecto de desenfoque */
+    max-width: 900px;
+    /* Ajusta el valor según tu preferencia */
+    margin-left: auto;
+    /* Centra el elemento horizontalmente */
+    margin-right: auto;
+    /* Centra el elemento horizontalmente */
 }
 
 /* Estilo del efecto de parallax para la imagen de fondo */
@@ -179,7 +243,7 @@ input[type="submit"]:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(41, 45, 62, 0.5), rgba(41, 45, 62, 0.8)); 
+    background: linear-gradient(to bottom, rgba(41, 45, 62, 0.5), rgba(41, 45, 62, 0.8));
     z-index: 0;
 }
 
@@ -212,11 +276,13 @@ input[type="submit"]:hover {
 }
 
 .social-icons a:hover {
-    transform: scale(1.1); /* Aumenta el tamaño al pasar el mouse */
+    transform: scale(1.1);
+    /* Aumenta el tamaño al pasar el mouse */
 }
 
 
 @media screen and (max-width: 768px) {
+
     /* Agrega estilos específicos para pantallas más pequeñas aquí */
     .hero {
         height: auto;
@@ -228,23 +294,27 @@ input[type="submit"]:hover {
     }
 
     .pen {
-        display: none; /* Puedes ocultar el ícono de pluma en pantallas más pequeñas */
+        display: none;
+        /* Puedes ocultar el ícono de pluma en pantallas más pequeñas */
     }
 }
 
 
 #projects-cont {
     text-align: center;
-    padding: 40px 20px; /* Ajusta el padding según tus necesidades */
+    padding: 40px 20px;
+    /* Ajusta el padding según tus necesidades */
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: left;
-  }
-  
-  .project-card {
-    width: 350px; /* Calcula el ancho de cada tarjeta (3 tarjetas en una fila) */
-    margin-bottom: 20px; /* Espaciado inferior entre tarjetas */
+}
+
+.project-card {
+    width: 350px;
+    /* Calcula el ancho de cada tarjeta (3 tarjetas en una fila) */
+    margin-bottom: 20px;
+    /* Espaciado inferior entre tarjetas */
     background-color: #353b4a;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -252,47 +322,60 @@ input[type="submit"]:hover {
     overflow: hidden;
     transition: transform 0.3s ease-in-out;
     margin-right: 10px;
-    min-height: 100%;
-  }
-  
-  .project-card:hover {
+    display: flex;
+    flex-direction: column;
+    /* Cambia la dirección del flex a columna */
+    justify-content: space-between;
+    min-height: fit-content;
+}
+
+.project-card:hover {
     transform: translateY(-5px);
-  }
-  
-  .project-card img {
+}
+
+.project-card img {
     width: 100%;
     height: auto;
     border-right: 1px solid #444267;
-  }
-  
-  .project-info {
+}
+
+.project-info {
+    height: 100%;
     padding: 10px;
-  }
-  
-  .project-info h3 {
-    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.project-info h3 {
+    padding-top: auto;
+    /* Elimina el padding-top */
+    margin-top: auto;
+    /* Mueve el margen al top */
+    padding-top: 5px;
     font-size: 1.5em;
     color: #ffffff;
-  }
-  
-  .project-info p {
+}
+
+.project-info p {
+    font-family: 'Cascadia Code', monospace;
+    text-align: center;
+    padding: 10px;
     color: #a6accd;
-    vertical-align: center;
-  }
-  
-  
-  #technologies {
+}
+
+
+#technologies {
     text-align: center;
     padding: 40px 0;
     overflow: hidden;
-  }
-  
-  h2 {
+}
+
+h2 {
     margin-bottom: 20px;
     font-size: 2em;
-  }
-  
-  .technology-icons {
+}
+
+.technology-icons {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -300,34 +383,34 @@ input[type="submit"]:hover {
     transform: translateY(20px);
     transition: opacity 1s ease, transform 1s ease, background-position-y 0.5s ease;
     background-position-y: 0;
-  }
-  
-  .technology-icons.active {
+}
+
+.technology-icons.active {
     margin-left: 25%;
     opacity: 1;
-    width: 50%; /* Ajusta el ancho para que ocupe el 50% del contenedor */
+    width: 50%;
+    /* Ajusta el ancho para que ocupe el 50% del contenedor */
     box-sizing: border-box;
     background-position-y: -100px;
-  }
-  
-  .technology-icon {
+}
+
+.technology-icon {
     margin: 15px;
     text-align: center;
     transition: transform 0.3s ease;
-  }
-  
-  .technology-icon:hover {
+}
+
+.technology-icon:hover {
     transform: scale(1.1);
-  }
-  
-  .technology-icon i {
+}
+
+.technology-icon i {
     font-size: 3em;
     color: #c792ea;
-  }
-  
-  .technology-icon p {
+}
+
+.technology-icon p {
     margin-top: 10px;
     font-size: 1.2em;
     color: #ffffff;
-  }
-  
+}
