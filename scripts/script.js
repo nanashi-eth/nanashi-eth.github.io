@@ -1,13 +1,26 @@
 $(document).ready(function () {
+  // Selecciona el elemento hero-content
+  const heroContent = $(".hero-content");
+
+  // Configura la animación con GSAP
+  gsap.from(heroContent, {
+    y: -1000, // Mueve el elemento hacia arriba desde una posición inicial
+    ease: "elastic", // Utiliza una función elástica para simular un rebote
+    duration: 2, // Duración de la animación
+    onComplete: function () {
+      // Función que se ejecuta cuando la animación está completa
+      gsap.to(heroContent, {
+        y: 0, // Hace que el elemento se quede en su posición final
+        ease: "elastic.out(1, 0.3)", // Utiliza una función elástica para simular un choque elástico
+        duration: 1.5,
+      });
+    },
+  });
+
   var $footer = $("footer");
   $footer.css("visibility", "hidden");
 
-  var $hero = $(".hero");
   var $description = $(".description");
-  var $logo = $(".developer-logo");
-  var $h1 = $(".hero h1");
-  var $technologyIcons = $(".technology-icons");
-  $hero.addClass("active");
 
   function updateScroll() {
     var scrollPosition = $(window).scrollTop();
@@ -32,15 +45,6 @@ $(document).ready(function () {
       fadeOut($description);
     }
 
-    var technologiesOffset =
-      $technologyIcons.offset().top - $(window).height() + 100;
-
-    if (scrollPosition > technologiesOffset) {
-      $technologyIcons.addClass("active");
-    } else {
-      $technologyIcons.removeClass("active");
-    }
-
     $(".hero").css("background-position-y", scrollPosition * 0.5 + "px");
 
     var scrollProgress =
@@ -48,14 +52,6 @@ $(document).ready(function () {
     var rotation = 360 * scrollProgress;
     $(".pen").css("transform", "rotate(" + rotation + "deg)");
     $(".pen1").css("transform", "rotate(" + -rotation + "deg)");
-
-    if (scrollPosition > heroHeight / 7) {
-      fadeOut($logo);
-      fadeOut($h1);
-    } else if (scrollPosition === 0) {
-      fadeIn($logo);
-      fadeIn($h1);
-    }
   }
 
   function scrollHandler() {
@@ -88,10 +84,16 @@ $(document).ready(function () {
       githubLink: "https://github.com/nanashi-eth/employeeAppV2.0",
     },
     2: {
-      name: "Nombre del Proyecto 2",
+      name: "Anime Catalog",
       description:
         "Descripción corta del proyecto 2. Puedes proporcionar detalles sobre las tecnologías utilizadas y los objetivos del proyecto.",
       githubLink: "https://github.com/nanashi-eth/WinformApp",
+    },
+    3: {
+      name: "Sakura Soundblade Saga",
+      description:
+        "Descripción corta del proyecto 2. Puedes proporcionar detalles sobre las tecnologías utilizadas y los objetivos del proyecto.",
+      githubLink: "https://sakura-soundblade-saga.pages.dev/",
     },
     // Agrega más información según sea necesario
   };
@@ -103,4 +105,87 @@ $(document).ready(function () {
   }
 
   $projectCards.click(redirectToGitHub);
+
+  // $(window).mousedown(function (e) {
+  //   $(".click_pop").remove();
+  //   $("body").append(
+  //     '<span class="click_pop" style="left:' +
+  //       e.pageX +
+  //       "px;top:" +
+  //       e.pageY +
+  //       'px;"><span/><span/><span/><span/></span>'
+  //   );
+  // });
+  // Manejadores de clic para cambiar idioma
+  $("#btn-es").click(function () {
+    cambiarIdioma("es");
+  });
+
+  $("#btn-en").click(function () {
+    cambiarIdioma("en");
+  });
+
+  // Textos en diferentes idiomas
+  const textos = {
+    es: {
+      "hero-titulo": "Nanashi",
+      "hero-descripcion":
+        "Estudiante de Desarrollo de Aplicaciones Multiplataforma con especialización en ciberseguridad...",
+      "projects-titulo": "Proyectos",
+      "projects-descripcion-1":
+        "Una aplicación Java y Swing para la gestión eficiente de empleados...",
+      "projects-descripcion-2":
+        "Una aplicación de catálogo de animes con .NET y WinForms...",
+      "projects-descripcion-3":
+        "Un entrenador de puntería web con temática japonesa...",
+      "technologies-titulo": "Tecnologías",
+      "social-media-titulo": "Sígueme en las Redes Sociales",
+      "contact-titulo": "Contacto",
+      "contact-nombre": "Nombre",
+      "contact-email": "Correo Electrónico",
+      "contact-mensaje": "Mensaje",
+      "contact-enviar": "Enviar",
+    },
+    en: {
+      "hero-titulo": "Nanashi",
+      "hero-descripcion":
+        "Student of Multiplatform Application Development with a specialization in cybersecurity...",
+      "projects-titulo": "Projects",
+      "projects-descripcion-1":
+        "A Java and Swing application for efficient employee management...",
+      "projects-descripcion-2":
+        "An anime catalog application with .NET and WinForms...",
+      "projects-descripcion-3":
+        "A web-based target shooting trainer with a Japanese theme...",
+      "technologies-titulo": "Technologies",
+      "social-media-titulo": "Follow Me on Social Media",
+      "contact-titulo": "Contact",
+      "contact-nombre": "Name",
+      "contact-email": "Email",
+      "contact-mensaje": "Message",
+      "contact-enviar": "Send",
+    },
+  };
+
+  function cambiarIdioma(idioma) {
+    // Obtén todos los elementos que tienen texto que cambiará
+    var elementos = document.querySelectorAll(
+      '[id^="hero-"], [id^="projects-"], [id^="technologies-"], [id^="social-media-"], [id^="contact-"]'
+    );
+
+    // Itera sobre los elementos y cambia su texto según el idioma seleccionado
+    elementos.forEach(function (elemento) {
+      var clave = elemento.id;
+      if (textos[idioma] && textos[idioma][clave]) {
+        elemento.innerText = textos[idioma][clave];
+        if (elemento.tagName === "INPUT" || elemento.tagName === "TEXTAREA") {
+          elemento.placeholder = textos[idioma][clave];
+          elemento.innerText = "";
+        }
+        if (clave === "contact-enviar") {
+          elemento.value = textos[idioma][clave];
+        }
+      }
+    });
+  }
 });

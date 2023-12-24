@@ -10,11 +10,25 @@
     <link rel="icon" href="assets/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cascadia+Code:wght@300&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap">
     <link rel="stylesheet" href="styles/styles.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://unpkg.com/gsap@3.9.0/dist/gsap.min.js"></script>
 </head>
 
 <body>
+    <!-- Botones de cambio de idioma con emojis -->
+    <div class="language-buttons">
+        <div class="language-buttons">
+            <button id="btn-es">
+                🇪🇸
+            </button>
+            <button id="btn-en">
+                🇬🇧
+            </button>
+        </div>
+    </div>
     <header class="hero">
         <div class="hero-content">
             <img src="assets/logo.png" alt="Logo de Desarrollador" class="developer-logo">
@@ -29,17 +43,16 @@
         </div>
     </header>
 
-
     <div class="pen"></div>
 
     <section id="projects">
-        <h2>Proyectos</h2>
+        <h2 id="projects-titulo">Proyectos</h2>
         <div id="projects-cont">
             <div class="project-card" data-project-id="1">
                 <img src="assets/Projects/proyecto1.png" alt="Proyecto 1">
                 <div class="project-info">
                     <h3>GestorEmpleadosX</h3>
-                    <p>Una aplicación Java y Swing para la gestión eficiente de empleados. Simplifica la administración
+                    <p id="projects-descripcion-1">Una aplicación Java y Swing para la gestión eficiente de empleados. Simplifica la administración
                         de recursos humanos con una interfaz fácil de usar. Incluye características esenciales para
                         seguimiento, asignación de tareas y evaluación de desempeño.</p>
                 </div>
@@ -49,18 +62,21 @@
                 <img src="assets/Projects/proyecto2.png" alt="Proyecto 2">
                 <div class="project-info">
                     <h3>AnimeCatalog .NET</h3>
-                    <p>Una aplicación de catálogo de animes con .NET y WinForms. Explora y disfruta de tus animes
+                    <p id="projects-descripcion-2">Una aplicación de catálogo de animes con .NET y WinForms. Explora y disfruta de tus animes
                         favoritos con funcionalidades avanzadas y una interfaz atractiva gracias al framework Bunifu. La
                         persistencia de datos mediante JSON garantiza una experiencia de usuario fluida y personalizada.
                         Descubre nuevos animes de manera eficiente con capacidades de exploración y búsqueda.</p>
                 </div>
             </div>
 
-            <div class="project-card" data-project-id="2">
+            <div class="project-card" data-project-id="3">
                 <img src="assets/Projects/proyecto3.gif" alt="Proyecto 3">
                 <div class="project-info">
                     <h3>Sakura Soundblade Saga</h3>
-                    <p>Un entrenador de puntería web con temática japonesa. Perfecciona tu puntería mientras te sumerges en un ambiente inspirado en la cultura japonesa. Desafía y mejora tus habilidades de apuntado con una experiencia envolvente y divertida. ¡Domina tu puntería con este entrenador único en línea!</p>
+                    <p id="projects-descripcion-3">Un entrenador de puntería web con temática japonesa. Perfecciona tu puntería mientras te sumerges
+                        en un ambiente inspirado en la cultura japonesa. Desafía y mejora tus habilidades de apuntado
+                        con una experiencia envolvente y divertida. ¡Domina tu puntería con este entrenador único en
+                        línea!</p>
                 </div>
             </div>
         </div>
@@ -69,7 +85,7 @@
     <div class="pen1"></div>
 
     <section id="technologies">
-        <h2>Tecnologías</h2>
+        <h2 id="technologies-titulo">Tecnologías</h2>
         <div class="technology-icons">
             <!-- Tecnologías web -->
             <div class="technology-icon">
@@ -133,28 +149,28 @@
 
 
     <section id="social-media">
-        <h2>Sígueme en las Redes Sociales</h2>
+        <h2 id="social-media-titulo">Sígueme en las Redes Sociales</h2>
         <div class="social-icons">
-            <a href="https://www.linkedin.com/in/nanashi-eth-dev/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.linkedin.com/in/nanashi-eth-dev/" target="_blank"><i
+                    class="fab fa-linkedin-in"></i></a>
             <a href="https://twitter.com/nanashi_eth_dev" target="_blank"><i class="fab fa-twitter"></i></a>
             <!-- Agrega más enlaces a tus redes sociales aquí -->
         </div>
     </section>
 
     <section id="contact">
-        <h2>Contacto</h2>
+        <h2 id="contact-titulo">Contacto</h2>
         <form method="POST" action="https://forms.un-static.com/forms/d4ef5b9dacf8f7d4fa98053dc395ed3659ca4efc">
-            <input type="text" name="name" placeholder="Nombre" required><br><br>
-            <input type="email" name="email" placeholder="Correo Electrónico" required><br><br>
-            <textarea name="message" placeholder="Mensaje" required></textarea><br><br>
-            <input type="submit" value="Enviar">
+            <input type="text" id="contact-nombre" name="name" placeholder="Nombre" required><br><br>
+            <input type="email" id="contact-email" name="email" placeholder="Correo Electrónico" required><br><br>
+            <textarea name="message" id="contact-mensaje" placeholder="Mensaje" required></textarea><br><br>
+            <input type="submit" id="contact-enviar" value="Enviar">
         </form>
     </section>
 
     <footer>
         <p>&copy; 2023 Nanashi</p>
     </footer>
-
     <script src="scripts/script.js"></script>
 </body>
 

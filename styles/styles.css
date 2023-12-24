@@ -1,14 +1,11 @@
-@font-face {
-    font-family: 'Cascadia Code';
-    src: url('https://fonts.googleapis.com/css2?family=Cascadia+Code&display=swap');
-    /* Puedes agregar otras variantes de la fuente (negrita, cursiva, etc.) si es necesario */
-}
-
 /* Reset CSS básico */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    scrollbar-width: none;
+    -webkit-user-drag: none;
+    /* Evita el arrastre de imágenes en navegadores basados en WebKit, como Chrome y Safari */
 }
 
 img {
@@ -36,8 +33,13 @@ h2 {
     /* Evita la selección de texto en navegadores basados en WebKit, como Chrome y Safari */
 }
 
+h2 {
+    font-family: 'Montserrat', monospace;
+}
+
 body {
     overflow-x: hidden;
+    /* overflow-y: hidden; */
     font-family: 'Arial', sans-serif;
     background-color: #292d3e;
     color: #a6accd;
@@ -97,6 +99,8 @@ section {
 
 /* Estilo del formulario */
 form {
+    user-select: none;
+    -webkit-user-select: none;
     max-width: 400px;
     margin: 0 auto;
     background-color: #333755;
@@ -132,6 +136,23 @@ textarea {
     color: #a6accd;
 }
 
+/* Desactivar la capacidad de redimensionar y establecer un tamaño fijo para el textarea */
+textarea {
+    resize: none;
+    width: 100%;
+    /* Puedes ajustar el ancho según tus preferencias */
+    height: 150px;
+    /* Puedes ajustar la altura según tus preferencias */
+}
+
+/* Estilo cuando el campo está enfocado */
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+    box-shadow: #a8a8ff 0 0 20px;
+    /* Cambia el color del borde al enfocar el campo */
+}
+
 /* Estilo del botón de enviar */
 input[type="submit"] {
     width: 100%;
@@ -142,6 +163,7 @@ input[type="submit"] {
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    font-weight: bold;
 }
 
 input[type="submit"]:hover {
@@ -150,15 +172,16 @@ input[type="submit"]:hover {
 
 /* Estilo de enlaces sociales */
 .social-icons {
+    font-size: x-large;
     text-align: center;
     margin-top: 50px;
 }
 
 .social-icons a {
+    font-size: larger;
     display: inline-block;
     text-decoration: none;
-    color: #ffffff;
-    background-color: #c792ea;
+    color: #c792ea;
     padding: 10px 20px;
     border-radius: 5px;
     transition: background-color 0.3s;
@@ -166,7 +189,8 @@ input[type="submit"]:hover {
 }
 
 .social-icons a:hover {
-    background-color: #a371f7;
+    color: #292d3e;
+    background-color: #c792ea;
 }
 
 /* Añade un nuevo estilo para la sección del header */
@@ -184,10 +208,10 @@ input[type="submit"]:hover {
 }
 
 .hero-content {
-    top: 40vh;
+    /* Asegúrate de que el elemento tenga una posición relativa o absoluta para que GSAP pueda manejar las transformaciones correctamente */
     position: relative;
+    top: 37vh;
     z-index: 1;
-    animation: fadeInUp 1s ease-out;
 }
 
 .developer-logo {
@@ -206,7 +230,7 @@ input[type="submit"]:hover {
     /* Aumenté el tamaño del texto para hacerlo más llamativo */
     font-weight: bold;
     /* Añadí negrita para mayor énfasis */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    text-shadow: 0 0 10px #6a6aff;
     /* Añadí sombra para resaltar el texto */
 }
 
@@ -220,6 +244,7 @@ input[type="submit"]:hover {
     font-family: 'Cascadia Code', monospace;
     animation: fadeIn 1s;
     background-color: rgba(41, 45, 62, 0.5);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     /* Fondo translúcido con un 70% de opacidad */
     padding: 20px;
     /* Ajusta según tu preferencia */
@@ -275,11 +300,6 @@ input[type="submit"]:hover {
     right: 0px;
 }
 
-.social-icons a:hover {
-    transform: scale(1.1);
-    /* Aumenta el tamaño al pasar el mouse */
-}
-
 
 @media screen and (max-width: 768px) {
 
@@ -315,7 +335,8 @@ input[type="submit"]:hover {
     /* Calcula el ancho de cada tarjeta (3 tarjetas en una fila) */
     margin-bottom: 20px;
     /* Espaciado inferior entre tarjetas */
-    background-color: #353b4a;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     cursor: pointer;
@@ -331,12 +352,14 @@ input[type="submit"]:hover {
 
 .project-card:hover {
     transform: translateY(-5px);
+    box-shadow: #a8a8ff 0 0 20px;
 }
 
 .project-card img {
     width: 100%;
     height: auto;
-    border-right: 1px solid #444267;
+    border-radius: 8px;
+    transition: filter 0.3s ease;
 }
 
 .project-info {
@@ -364,6 +387,46 @@ input[type="submit"]:hover {
 }
 
 
+
+.project-card:hover img {
+    filter: blur(2px);
+    /* Aplica un efecto de desenfoque a la imagen al hacer hover */
+}
+
+.project-card {
+    position: relative;
+    /* Añade posición relativa para posicionar el div superpuesto */
+}
+
+.project-card:hover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    /* Fondo del div superpuesto */
+    z-index: 1;
+    /* Asegúrate de que esté superpuesto */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-card:hover::after {
+    content: "";
+    /* Puedes personalizar el texto que se muestra */
+    position: absolute;
+    color: #333;
+    /* Color del texto */
+    z-index: 2;
+    /* Asegúrate de que esté superpuesto */
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
 #technologies {
     text-align: center;
     padding: 40px 0;
@@ -379,13 +442,13 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    opacity: 0;
     transform: translateY(20px);
     transition: opacity 1s ease, transform 1s ease, background-position-y 0.5s ease;
     background-position-y: 0;
 }
 
-.technology-icons.active {
+
+.technology-icons {
     margin-left: 25%;
     opacity: 1;
     width: 50%;
@@ -405,12 +468,198 @@ h2 {
 }
 
 .technology-icon i {
+    padding: 5px;
     font-size: 3em;
     color: #c792ea;
 }
+.technology-icon:hover i{
+    -webkit-text-stroke: 2px #c792ea; /* Ancho y color del borde del texto para navegadores basados en WebKit */
+    text-shadow: 1px  1px 0  #c792ea;
+    border-radius: 10px;
+    color: #292d3e;
+}
 
 .technology-icon p {
+    font-family: 'Fira Code', monospace;
     margin-top: 10px;
     font-size: 1.2em;
     color: #ffffff;
+}
+
+.ball {
+    pointer-events: none;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: gray;
+    animation: implode 1s ease-in-out;
+    animation-fill-mode: both;
+    opacity: .5;
+}
+
+@keyframes implode {
+    100% {
+        transform: scale(0)
+    }
+}
+
+
+span.click_pop {
+    position: absolute;
+    display: block;
+    width: 60px;
+    height: 60px;
+    margin-top: -30px;
+    margin-left: -30px;
+    border-radius: 100%;
+    animation: click_pop 0.3s ease;
+    transform: rotate(15deg);
+    z-index: 999;
+}
+
+@keyframes click_pop {
+    0% {
+        box-shadow: inset 0 0 0 20px rgba(255, 255, 255, 0.3);
+        width: 60px;
+        height: 60px;
+        margin-top: -30px;
+        margin-left: -30px;
+        transform: rotate(-30deg);
+    }
+
+    100% {
+        box-shadow: inset 0 0 0 0 rgba(255, 255, 255, 0.2);
+        width: 70px;
+        height: 70px;
+        margin-top: -35px;
+        margin-left: -35px;
+        transform: rotate(15deg);
+    }
+}
+
+span.click_pop>span {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    top: 50%;
+    left: 50%;
+    margin-top: -30px;
+    margin-left: -30px;
+    transform: scale(0.9);
+    filter: blurY(5px);
+    -webkit-filter: blurY(5px);
+}
+
+span.click_pop>span:nth-of-type(2) {
+    transform: rotate(45deg);
+}
+
+span.click_pop>span:nth-of-type(3) {
+    transform: rotate(-45deg);
+}
+
+span.click_pop>span:last-child {
+    transform: rotate(90deg) scale(0.9);
+}
+
+span.click_pop>span:before,
+span.click_pop>span:after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 0;
+    top: 50%;
+    left: -14px;
+    margin-top: -1px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    animation: pop_out_L .3s ease;
+    animation-delay: .1s;
+}
+
+span.click_pop>span:after {
+    left: auto;
+    right: -14px;
+    animation: pop_out_R .3s ease;
+    animation-delay: .1s;
+}
+
+@keyframes pop_out_L {
+    0% {
+        left: 20px;
+        width: 2px;
+    }
+
+    20% {
+        box-shadow: 6px 0 rgba(255, 255, 255, 0.05), -4px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    40% {
+        width: 10px;
+    }
+
+    60% {
+        left: -14px;
+    }
+
+    100% {
+        width: 2px;
+    }
+}
+
+@keyframes pop_out_R {
+    0% {
+        right: 20px;
+        width: 2px;
+    }
+
+    20% {
+        box-shadow: 6px 0 rgba(255, 255, 255, 0.05), -4px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    40% {
+        width: 10px;
+    }
+
+    60% {
+        right: -14px;
+    }
+
+    100% {
+        width: 2px;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    background: none;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #c792ea;
+    border-radius: 15px;
+}
+
+/* Estilo para los botones de cambio de idioma con emojis */
+.language-buttons {
+    z-index: 2;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    display: flex;
+}
+
+.language-buttons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 5px;
+    font-size: 20px; 
 }
