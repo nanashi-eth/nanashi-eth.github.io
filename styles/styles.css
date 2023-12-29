@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'Cascadia Code';
+    src: local('../assets/fonts/Cascadia.ttf');
+    /* Puedes agregar más formatos de fuente aquí, dependiendo de los archivos que tengas disponibles */
+  }
+
 /* Reset CSS básico */
 * {
     margin: 0;
@@ -235,7 +241,6 @@ input[type="submit"]:hover {
 }
 
 .description {
-    display: none;
     width: fit-content;
     text-align: justify;
     /* Oculta la descripción inicialmente */
@@ -327,11 +332,12 @@ input[type="submit"]:hover {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: left;
+    justify-content: space-around;
 }
 
 .project-card {
-    width: 350px;
+    width: 300px;
+    height: auto;
     /* Calcula el ancho de cada tarjeta (3 tarjetas en una fila) */
     margin-bottom: 20px;
     /* Espaciado inferior entre tarjetas */
@@ -347,7 +353,9 @@ input[type="submit"]:hover {
     flex-direction: column;
     /* Cambia la dirección del flex a columna */
     justify-content: space-between;
+    gap: 10px;
     min-height: fit-content;
+    overflow: hidden;
 }
 
 .project-card:hover {
@@ -359,6 +367,7 @@ input[type="submit"]:hover {
     width: 100%;
     height: auto;
     border-radius: 8px;
+    border: 1px solid #ffffff;
     transition: filter 0.3s ease;
 }
 
@@ -367,15 +376,15 @@ input[type="submit"]:hover {
     padding: 10px;
     display: flex;
     flex-direction: column-reverse;
+    align-items: center;
+    position: relative;
 }
 
 .project-info h3 {
-    padding-top: auto;
-    /* Elimina el padding-top */
     margin-top: auto;
     /* Mueve el margen al top */
-    padding-top: 5px;
-    font-size: 1.5em;
+    padding-top: 0px;
+    font-size: 1.3em;
     color: #ffffff;
 }
 
@@ -383,48 +392,30 @@ input[type="submit"]:hover {
     font-family: 'Cascadia Code', monospace;
     text-align: center;
     padding: 10px;
-    color: #a6accd;
-}
-
-
-
-.project-card:hover img {
-    filter: blur(2px);
-    /* Aplica un efecto de desenfoque a la imagen al hacer hover */
-}
-
-.project-card {
-    position: relative;
-    /* Añade posición relativa para posicionar el div superpuesto */
-}
-
-.project-card:hover::before {
-    content: "";
+    color: #ffffff;
     position: absolute;
-    top: 0;
+    bottom: -1000%; /* Inicialmente, los textos están fuera de la vista, debajo de la tarjeta */
     left: 0;
     width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.8);
-    /* Fondo del div superpuesto */
-    z-index: 1;
-    /* Asegúrate de que esté superpuesto */
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    transition: bottom 0.5s ease-in-out;
+    overflow-y: hidden;
 }
 
-.project-card:hover::after {
-    content: "";
-    /* Puedes personalizar el texto que se muestra */
-    position: absolute;
-    color: #333;
-    /* Color del texto */
-    z-index: 2;
-    /* Asegúrate de que esté superpuesto */
-    font-size: 16px;
-    font-weight: bold;
+.project-card:hover p {
+    bottom: auto; /* Cuando hover, mover los textos hacia arriba (0 significa que estarán visibles) */
+    top: auto;
 }
+
+.project-card:hover .project-info {
+    top: 0;
+    padding: auto;
+    height: 100%;
+}
+
+.project-card:hover img {
+    filter: blur(10px); /* Aplicar desenfoque a la imagen cuando hover */
+}
+
 
 
 #technologies {
@@ -471,20 +462,54 @@ h2 {
     padding: 5px;
     font-size: 3em;
     color: #c792ea;
+    text-decoration: none;
 }
 .technology-icon:hover i{
-    -webkit-text-stroke: 2px #c792ea; /* Ancho y color del borde del texto para navegadores basados en WebKit */
-    text-shadow: 1px  1px 0  #c792ea;
-    border-radius: 10px;
     color: #292d3e;
+    text-shadow: -1px -1px 0 #c792ea, 1px -1px 0 #c792ea, -1px 1px 0 #c792ea, 1px 1px 0 #c792ea;
+    border-radius: 15px;
 }
 
-.technology-icon p {
+.technology-icon::before {
     font-family: 'Fira Code', monospace;
-    margin-top: 10px;
-    font-size: 1.2em;
-    color: #ffffff;
-}
+    content: attr(tooltip);
+    position: absolute;
+    top: 0;
+    font-size: 0.9em;
+    font-weight: bold;
+    z-index: -1;
+    opacity: 0;
+    pointer-events: auto;
+    background: #fff;
+    padding: 10px;
+    color: #000;
+    letter-spacing: 1px;
+    transition: all 0.3s ease-out;
+  }
+  
+  .technology-icon::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    top: 0;
+    opacity: 0;
+    background: #fff;
+    transform: rotate(45deg);
+    left: 20%;
+    z-index: -2;
+    transition: all 0.3s ease-out;
+  }
+  
+  .technology-icon:hover::before {
+    top: -45px;
+    opacity: 1;
+  }
+  
+  .technology-icon:hover::after {
+    top: -12px;
+    opacity: 1;
+  }
 
 .ball {
     pointer-events: none;
@@ -547,8 +572,8 @@ span.click_pop>span {
     margin-top: -30px;
     margin-left: -30px;
     transform: scale(0.9);
-    filter: blurY(5px);
-    -webkit-filter: blurY(5px);
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
 }
 
 span.click_pop>span:nth-of-type(2) {

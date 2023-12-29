@@ -129,15 +129,27 @@ $(document).ready(function () {
   const textos = {
     es: {
       "hero-titulo": "Nanashi",
+      "hero-description-titulo": "Sobre Mi",
       "hero-descripcion":
-        "Estudiante de Desarrollo de Aplicaciones Multiplataforma con especialización en ciberseguridad...",
+        "Estudiante de Desarrollo de Aplicaciones Multiplataforma con especialización en " +
+        "ciberseguridad. <br><br>" +
+        "Una sólida formación académica y certificaciones en diversas áreas tecnológicas. " +
+        "Comprometido con el aprendizaje continuo y la adquisición de habilidades " +
+        "prácticas en el desarrollo de software, ciberseguridad, administración de sistemas " +
+        "y machine learning. <br><br>" +
+        "Demostrada capacidad para diseñar, implementar y mantener aplicaciones seguras y eficientes.</p>",
       "projects-titulo": "Proyectos",
       "projects-descripcion-1":
-        "Una aplicación Java y Swing para la gestión eficiente de empleados...",
+        "Una aplicación Java y Swing para la gestión eficiente de empleados. " +
+        "Simplifica la administración de recursos humanos con una interfaz fácil de usar. " +
+        "Incluye características esenciales para seguimiento, asignación de tareas y evaluación de desempeño.",
       "projects-descripcion-2":
-        "Una aplicación de catálogo de animes con .NET y WinForms...",
+        "App de catálogo de animes con .NET y WinForms. Explora tus animes favoritos " +
+        "con interfaz atractiva y persistencia de datos en JSON para experiencia personalizada. Descubre nuevos animes eficientemente.",
       "projects-descripcion-3":
-        "Un entrenador de puntería web con temática japonesa...",
+        "Entrenador de puntería web con temática japonesa. Perfecciona tu puntería " +
+        "en un ambiente inspirado en la cultura japonesa. Desafía y mejora tus habilidades de apuntado con " +
+        "una experiencia envolvente. ¡Domina tu puntería con este entrenador en línea único!",
       "technologies-titulo": "Tecnologías",
       "social-media-titulo": "Sígueme en las Redes Sociales",
       "contact-titulo": "Contacto",
@@ -148,15 +160,24 @@ $(document).ready(function () {
     },
     en: {
       "hero-titulo": "Nanashi",
+      "hero-description-titulo": "About Me",
       "hero-descripcion":
-        "Student of Multiplatform Application Development with a specialization in cybersecurity...",
+        "Multiplatform Application Development student with a focus on cybersecurity. <br><br>" +
+        "Solid academic background and certifications in various technological areas. " +
+        "Committed to continuous learning and acquiring practical skills in software development, cybersecurity, system administration, and machine learning. <br><br>" +
+        "Proven ability to design, implement, and maintain secure and efficient applications.",
       "projects-titulo": "Projects",
       "projects-descripcion-1":
-        "A Java and Swing application for efficient employee management...",
+        "A Java and Swing application for efficient employee management. " +
+        "Simplifies human resources administration with a user-friendly interface. " +
+        "Includes essential features for tracking, task assignment, and performance evaluation.",
       "projects-descripcion-2":
-        "An anime catalog application with .NET and WinForms...",
+        "Anime catalog app with .NET and WinForms. Explore favorites with an attractive interface, " +
+        "JSON data persistence for a personalized experience. Discover new anime efficiently.",
       "projects-descripcion-3":
-        "A web-based target shooting trainer with a Japanese theme...",
+        "Web-based target shooting trainer with a Japanese theme. Hone your aim in an " +
+        "environment inspired by Japanese culture. Challenge and improve your targeting skills with an engaging " +
+        "experience. Master your aim with this unique online trainer!",
       "technologies-titulo": "Technologies",
       "social-media-titulo": "Follow Me on Social Media",
       "contact-titulo": "Contact",
@@ -166,8 +187,16 @@ $(document).ready(function () {
       "contact-enviar": "Send",
     },
   };
+  $("#btn-es").hide();
 
   function cambiarIdioma(idioma) {
+    if (idioma === "es") {
+      $("#btn-es").hide();
+      $("#btn-en").show();
+    } else if (idioma === "en") {
+      $("#btn-es").show();
+      $("#btn-en").hide();
+    }
     // Obtén todos los elementos que tienen texto que cambiará
     var elementos = document.querySelectorAll(
       '[id^="hero-"], [id^="projects-"], [id^="technologies-"], [id^="social-media-"], [id^="contact-"]'
@@ -177,7 +206,7 @@ $(document).ready(function () {
     elementos.forEach(function (elemento) {
       var clave = elemento.id;
       if (textos[idioma] && textos[idioma][clave]) {
-        elemento.innerText = textos[idioma][clave];
+        elemento.innerHTML = textos[idioma][clave];
         if (elemento.tagName === "INPUT" || elemento.tagName === "TEXTAREA") {
           elemento.placeholder = textos[idioma][clave];
           elemento.innerText = "";
