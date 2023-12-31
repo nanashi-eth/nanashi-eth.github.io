@@ -12,8 +12,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap">
     <link rel="stylesheet" href="styles/styles.css">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://unpkg.com/gsap@3.9.0/dist/gsap.min.js"></script>
 </head>
 
 <body>
@@ -28,22 +26,32 @@
             </button>
         </div>
     </div>
-    <header class="hero">
+    <nav class="navbar">
+        <ul>
+            <li draggable="false"><a href="#home" id="navbar-inicio">Inicio</a></li>
+            <li draggable="false"><a href="#me" id="navbar-sobre-mi">Sobre Mi</a></li>
+            <li draggable="false"><a href="#projects" id="navbar-proyectos">Proyectos</a></li>
+            <li draggable="false"><a href="#technologies" id="navbar-tecnologias">Tecnologías</a></li>
+            <li draggable="false"><a href="#contact" id="navbar-contacto">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <header id="home" class="hero">
         <div class="hero-content">
             <img src="assets/logo.png" alt="Logo de Desarrollador" class="developer-logo">
             <h1>Nanashi</h1>
-            <div class="hero-description-container">
-                <h3 id="hero-description-titulo">Sobre Mi</h3>
-                <p id="hero-descripcion" class="description">Estudiante de Desarrollo de Aplicaciones Multiplataforma
-                    con
-                    especialización en
-                    ciberseguridad. <br><br>
-                    Una sólida formación académica y certificaciones en diversas áreas tecnológicas.
-                    Comprometido con el aprendizaje continuo y la adquisición de habilidades
-                    prácticas en el desarrollo de software, ciberseguridad, administración de sistemas
-                    y machine learning. <br><br>
-                    Demostrada capacidad para diseñar, implementar y mantener aplicaciones seguras y eficientes.</p>
-            </div>
+        </div>
+        <div id="me" class="hero-description-container">
+            <h3 id="hero-description-titulo">Sobre Mi</h3>
+            <p id="hero-descripcion" class="description">Estudiante de Desarrollo de Aplicaciones Multiplataforma
+                con
+                especialización en
+                ciberseguridad. <br><br>
+                Una sólida formación académica y certificaciones en diversas áreas tecnológicas.
+                Comprometido con el aprendizaje continuo y la adquisición de habilidades
+                prácticas en el desarrollo de software, ciberseguridad, administración de sistemas
+                y machine learning. <br><br>
+                Demostrada capacidad para diseñar, implementar y mantener aplicaciones seguras y eficientes.</p>
         </div>
     </header>
 
@@ -53,7 +61,7 @@
         <h2 id="projects-titulo">Proyectos</h2>
         <div id="projects-cont">
             <div class="project-card" data-project-id="1">
-                <img src="assets/Projects/proyecto1.png" alt="Proyecto 1">
+                <img src="assets/Projects/proyecto1.png" alt="Proyecto 1" loading="lazy">
                 <div class="project-info">
                     <h3>GestorEmpleadosX</h3>
                     <p id="projects-descripcion-1">Una aplicación Java y Swing para la gestión eficiente de empleados.
@@ -64,26 +72,17 @@
             </div>
 
             <div class="project-card" data-project-id="2">
-                <img src="assets/Projects/proyecto2.png" alt="Proyecto 2">
+                <img src="assets/Projects/proyecto2.png" alt="Proyecto 2" loading="lazy">
                 <div class="project-info">
                     <h3>AnimeCatalog .NET</h3>
-                    <p id="projects-descripcion-2">Catálogo de animes en .NET y WinForms con interfaz atractiva y funciones avanzadas. Persistencia de datos en JSON para una experiencia personalizada y búsqueda eficiente de animes.</p>
+                    <p id="projects-descripcion-2">Catálogo de animes en .NET y WinForms con interfaz atractiva y
+                        funciones avanzadas. Persistencia de datos en JSON para una experiencia personalizada y búsqueda
+                        eficiente de animes.</p>
                 </div>
             </div>
 
             <div class="project-card" data-project-id="3">
-                <img src="assets/Projects/proyecto3.gif" alt="Proyecto 3">
-                <div class="project-info">
-                    <h3>Sakura Soundblade Saga</h3>
-                    <p id="projects-descripcion-3">Un entrenador de puntería web con temática japonesa. Perfecciona tu
-                        puntería mientras te sumerges
-                        en un ambiente inspirado en la cultura japonesa. Desafía y mejora tus habilidades de apuntado
-                        con una experiencia envolvente y divertida. ¡Domina tu puntería con este entrenador único en
-                        línea!</p>
-                </div>
-            </div>
-            <div class="project-card" data-project-id="3">
-                <img src="assets/Projects/proyecto3.gif" alt="Proyecto 3">
+                <img src="assets/Projects/proyecto3.gif" alt="Proyecto 3" loading="lazy">
                 <div class="project-info">
                     <h3>Sakura Soundblade Saga</h3>
                     <p id="projects-descripcion-3">Un entrenador de puntería web con temática japonesa. Perfecciona tu
@@ -172,6 +171,8 @@
     <footer>
         <p>&copy; 2023 Nanashi</p>
     </footer>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://unpkg.com/gsap@3.9.0/dist/gsap.min.js"></script>
     <script src="scripts/script.js"></script>
 </body>
 

@@ -20,8 +20,6 @@ $(document).ready(function () {
   var $footer = $("footer");
   $footer.css("visibility", "hidden");
 
-  var $description = $(".description");
-
   function updateScroll() {
     var scrollPosition = $(window).scrollTop();
     var heroHeight = $(".hero").outerHeight();
@@ -30,19 +28,6 @@ $(document).ready(function () {
       $footer.css("visibility", "visible");
     } else {
       $footer.css("visibility", "hidden");
-    }
-
-    var descriptionOffset =
-      $description.offset().top - $(window).height() + 100;
-    var hideDescriptionOffset = heroHeight / 2 + 130;
-
-    if (
-      scrollPosition > descriptionOffset &&
-      scrollPosition < hideDescriptionOffset
-    ) {
-      fadeIn($description);
-    } else {
-      fadeOut($description);
     }
 
     $(".hero").css("background-position-y", scrollPosition * 0.5 + "px");
@@ -106,16 +91,6 @@ $(document).ready(function () {
 
   $projectCards.click(redirectToGitHub);
 
-  // $(window).mousedown(function (e) {
-  //   $(".click_pop").remove();
-  //   $("body").append(
-  //     '<span class="click_pop" style="left:' +
-  //       e.pageX +
-  //       "px;top:" +
-  //       e.pageY +
-  //       'px;"><span/><span/><span/><span/></span>'
-  //   );
-  // });
   // Manejadores de clic para cambiar idioma
   $("#btn-es").click(function () {
     cambiarIdioma("es");
@@ -137,7 +112,7 @@ $(document).ready(function () {
         "Comprometido con el aprendizaje continuo y la adquisición de habilidades " +
         "prácticas en el desarrollo de software, ciberseguridad, administración de sistemas " +
         "y machine learning. <br><br>" +
-        "Demostrada capacidad para diseñar, implementar y mantener aplicaciones seguras y eficientes.</p>",
+        "Demostrada capacidad para diseñar, implementar y mantener aplicaciones seguras y eficientes.",
       "projects-titulo": "Proyectos",
       "projects-descripcion-1":
         "Una aplicación Java y Swing para la gestión eficiente de empleados. " +
@@ -157,6 +132,11 @@ $(document).ready(function () {
       "contact-email": "Correo Electrónico",
       "contact-mensaje": "Mensaje",
       "contact-enviar": "Enviar",
+      "navbar-inicio": "Inicio",
+      "navbar-sobre-mi": "Sobre Mi",
+      "navbar-proyectos": "Proyectos",
+      "navbar-tecnologias": "Tecnologías",
+      "navbar-contacto": "Contacto",
     },
     en: {
       "hero-titulo": "Nanashi",
@@ -185,6 +165,11 @@ $(document).ready(function () {
       "contact-email": "Email",
       "contact-mensaje": "Message",
       "contact-enviar": "Send",
+      "navbar-inicio": "Home",
+      "navbar-sobre-mi": "About Me",
+      "navbar-proyectos": "Projects",
+      "navbar-tecnologias": "Technologies",
+      "navbar-contacto": "Contact",
     },
   };
   $("#btn-es").hide();
@@ -199,7 +184,7 @@ $(document).ready(function () {
     }
     // Obtén todos los elementos que tienen texto que cambiará
     var elementos = document.querySelectorAll(
-      '[id^="hero-"], [id^="projects-"], [id^="technologies-"], [id^="social-media-"], [id^="contact-"]'
+      '[id^="hero-"], [id^="projects-"], [id^="technologies-"], [id^="social-media-"], [id^="contact-"], [id^="navbar-"]'
     );
 
     // Itera sobre los elementos y cambia su texto según el idioma seleccionado
@@ -217,4 +202,27 @@ $(document).ready(function () {
       }
     });
   }
+
+  $(document).ready(function () {
+    // Selector de los enlaces de la barra de navegación
+    $(".navbar li").on("click", function (e) {
+      e.preventDefault();
+
+      // Obtiene el atributo href del enlace clicado
+      const target = $(this).find("a").attr("href");
+
+      // Desplazamiento suave a la sección correspondiente
+      $("html, body").animate(
+        {
+          scrollTop: $(target).offset().top - 70,
+        },
+        800
+      );
+    });
+  });
+
+  function noDrag(event) {
+    event.preventDefault();
+  }
+  document.addEventListener("dragstart", noDrag, true);
 });
