@@ -158,7 +158,7 @@ $(document).ready(function () {
         "Web-based target shooting trainer with a Japanese theme. Hone your aim in an " +
         "environment inspired by Japanese culture. Challenge and improve your targeting skills with an engaging " +
         "experience. Master your aim with this unique online trainer!",
-      "technologies-titulo": "Technologies",
+      "technologies-titulo": "Skills",
       "social-media-titulo": "Follow Me on Social Media",
       "contact-titulo": "Contact",
       "contact-nombre": "Name",
@@ -168,7 +168,7 @@ $(document).ready(function () {
       "navbar-inicio": "Home",
       "navbar-sobre-mi": "About Me",
       "navbar-proyectos": "Projects",
-      "navbar-tecnologias": "Technologies",
+      "navbar-tecnologias": "Skills",
       "navbar-contacto": "Contact",
     },
   };
