@@ -140,7 +140,7 @@ textarea {
     border: 1px solid #a6accd;
     border-radius: 4px;
     background-color: #292d3e;
-    color: #a6accd;
+    color: #dddfee;
 }
 
 /* Desactivar la capacidad de redimensionar y establecer un tamaño fijo para el textarea */
@@ -546,10 +546,12 @@ h2 {
 
 /* Estilo para los botones de cambio de idioma con emojis */
 .language-buttons {
+    height: 60px;
+    margin-top: 5px;
     z-index: 2;
     position: fixed;
-    top: 10px;
-    right: 10px;
+    top: 0;
+    right: 20px;
     display: flex;
 }
 
@@ -557,8 +559,30 @@ h2 {
     background: none;
     border: none;
     cursor: pointer;
-    margin-left: 5px;
-    font-size: 20px;
+    font-size: 25px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.language-buttons button:hover {
+    animation: rotateButton 0.6s ease-in-out; /* 2 vueltas en 0.6 segundos */
+}
+
+@keyframes rotateButton {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(10deg);
+    }
+    50% {
+        transform: rotate(-10deg);
+    }
+    75% {
+        transform: rotate(5deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
 }
 
 /* Barra de Navegación */
