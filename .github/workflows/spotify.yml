@@ -59,7 +59,7 @@ jobs:
             });
 
             if (nowPlayingResponse.status === 204 || nowPlayingResponse.status > 400) {
-              fs.writeFileSync("public/now-playing.json", JSON.stringify({ isPlaying: false }));
+              writeFileSync("public/now-playing.json", JSON.stringify({ isPlaying: false }));
               return;
             }
 
@@ -72,7 +72,7 @@ jobs:
               title: song.item?.name,
             };
 
-            fs.writeFileSync("public/now-playing.json", JSON.stringify(data, null, 2));
+            writeFileSync("public/now-playing.json", JSON.stringify(data, null, 2));
           })();' > spotify.mjs
 
                     # Ejecutar el script
