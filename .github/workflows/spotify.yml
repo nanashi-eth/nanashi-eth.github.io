@@ -73,10 +73,10 @@ jobs:
             };
 
             fs.writeFileSync("public/now-playing.json", JSON.stringify(data, null, 2));
-          })();' > spotify.js
+          })();' > spotify.mjs
 
                     # Ejecutar el script
-                    node --input-type=module spotify.js
+                    node --input-type=module spotify.mjs
 
                 - name: Commit and Push Changes
                   run: |
