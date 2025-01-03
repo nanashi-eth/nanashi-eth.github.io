@@ -76,7 +76,7 @@ jobs:
           })();' > spotify.js
 
                     # Ejecutar el script
-                    node spotify.js
+                    node --input-type=module spotify.js
 
                 - name: Commit and Push Changes
                   run: |
