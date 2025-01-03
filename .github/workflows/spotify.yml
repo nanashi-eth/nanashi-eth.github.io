@@ -13,6 +13,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Install dependencies
+        run: |
+          npm install node-fetch@2 query-string buffer
+
       - name: Fetch Now Playing from Spotify
         env:
           CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
