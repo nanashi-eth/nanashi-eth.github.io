@@ -19,15 +19,11 @@ jobs:
           CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
           REFRESH_TOKEN: ${{ secrets.SPOTIFY_REFRESH_TOKEN }}
         run: |
-          # Instalar dependencias
-          npm install node-fetch@2 query-string buffer
-
-          # Crear el script de Node.js
+          # Crear el script temporal
           echo 'import fetch from "node-fetch";
           import queryString from "query-string";
           import { writeFileSync, mkdirSync, existsSync } from "fs";
 
-          // Crear el directorio `public` si no existe
           if (!existsSync("public")) {
             mkdirSync("public");
           }
@@ -82,8 +78,8 @@ jobs:
 
           fetchNowPlaying().catch((err) => console.error(err));' > spotify.mjs
 
-                    # Ejecutar el script
-                    node spotify.mjs
+              # Ejecutar el script Node.js
+              node spotify.mjs
 
                 - name: Commit and Push Changes
                   run: |
