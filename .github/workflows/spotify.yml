@@ -25,32 +25,37 @@ jobs:
           # Crear el script de Node.js
           echo 'import fetch from "node-fetch";
           import queryString from "query-string";
-          import { writeFileSync } from "fs";
+          import { writeFileSync, mkdirSync, existsSync } from "fs";
 
-          (async () => {
-            const TOKEN_ENDPOINT = "https://accounts.spotify.com/api/token";
-            const NOW_PLAYING_ENDPOINT = "https://api.spotify.com/v1/me/player/currently-playing";
+          // Crear el directorio `public` si no existe
+          if (!existsSync("public")) {
+            mkdirSync("public");
+          }
 
-            const client_id = process.env.CLIENT_ID;
-            const client_secret = process.env.CLIENT_SECRET;
-            const refresh_token = process.env.REFRESH_TOKEN;
+          const TOKEN_ENDPOINT = "https://accounts.spotify.com/api/token";
+          const NOW_PLAYING_ENDPOINT = "https://api.spotify.com/v1/me/player/currently-playing";
 
+          const client_id = process.env.CLIENT_ID;
+          const client_secret = process.env.CLIENT_SECRET;
+          const refresh_token = process.env.REFRESH_TOKEN;
+
+          const getAccessToken = async () => {
             const basic = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
-            const getAccessToken = async () => {
-              const response = await fetch(TOKEN_ENDPOINT, {
-                method: "POST",
-                headers: {
-                  Authorization: `Basic ${basic}`,
-                  "Content-Type": "application/x-www-form-urlencoded",
-                },
-                body: queryString.stringify({
-                  grant_type: "refresh_token",
-                  refresh_token,
-                }),
-              });
-              return response.json();
-            };
+            const response = await fetch(TOKEN_ENDPOINT, {
+              method: "POST",
+              headers: {
+                Authorization: `Basic ${basic}`,
+                "Content-Type": "application/x-www-form-urlencoded",
+              },
+              body: queryString.stringify({
+                grant_type: "refresh_token",
+                refresh_token,
+              }),
+            });
+            return response.json();
+          };
 
+          const fetchNowPlaying = async () => {
             const { access_token } = await getAccessToken();
             const nowPlayingResponse = await fetch(NOW_PLAYING_ENDPOINT, {
               headers: {
@@ -59,7 +64,7 @@ jobs:
             });
 
             if (nowPlayingResponse.status === 204 || nowPlayingResponse.status > 400) {
-              writeFileSync("public/now-playing.json", JSON.stringify({ isPlaying: false }));
+              writeFileSync("public/now-playing.json", JSON.stringify({ isPlaying: false }, null, 2));
               return;
             }
 
@@ -73,7 +78,9 @@ jobs:
             };
 
             writeFileSync("public/now-playing.json", JSON.stringify(data, null, 2));
-          })();' > spotify.mjs
+          };
+
+          fetchNowPlaying().catch((err) => console.error(err));' > spotify.mjs
 
                     # Ejecutar el script
                     node spotify.mjs
