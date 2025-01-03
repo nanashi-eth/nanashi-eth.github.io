@@ -23,9 +23,9 @@ jobs:
           npm install node-fetch@2 query-string buffer
 
           # Crear el script de Node.js
-          echo 'const fetch = require("node-fetch");
-          const queryString = require("query-string");
-          const fs = require("fs");
+          echo 'import fetch from "node-fetch";
+          import queryString from "query-string";
+          import { writeFileSync } from "fs";
 
           (async () => {
             const TOKEN_ENDPOINT = "https://accounts.spotify.com/api/token";
