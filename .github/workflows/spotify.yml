@@ -1,0 +1,100 @@
+name: Update Now Playing
+
+on:
+  schedule:
+    - cron: "*/5 * * * *" # Ejecuta cada 5 minutos (puedes ajustar la frecuencia)
+  workflow_dispatch: # Permite ejecutar manualmente el workflow
+
+jobs:
+  update-now-playing:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          npm install node-fetch@2 query-string buffer
+
+      - name: Fetch Now Playing from Spotify
+        env:
+          CLIENT_ID: ${{ secrets.VITE_APP_SPOTIFY_CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.VITE_APP_SPOTIFY_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.VITE_APP_SPOTIFY_REFRESH_TOKEN }}
+        run: |
+          # Crear el script temporal
+          echo 'import fetch from "node-fetch";
+          import queryString from "query-string";
+          import { writeFileSync, mkdirSync, existsSync } from "fs";
+
+          if (!existsSync("public")) {
+            mkdirSync("public");
+          }
+
+          const TOKEN_ENDPOINT = "https://accounts.spotify.com/api/token";
+          const NOW_PLAYING_ENDPOINT = "https://api.spotify.com/v1/me/player/currently-playing";
+
+          const client_id = process.env.CLIENT_ID;
+          const client_secret = process.env.CLIENT_SECRET;
+          const refresh_token = process.env.REFRESH_TOKEN;
+
+          const getAccessToken = async () => {
+            const basic = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
+            const response = await fetch(TOKEN_ENDPOINT, {
+              method: "POST",
+              headers: {
+                Authorization: `Basic ${basic}`,
+                "Content-Type": "application/x-www-form-urlencoded",
+              },
+              body: queryString.stringify({
+                grant_type: "refresh_token",
+                refresh_token,
+              }),
+            });
+            return response.json();
+          };
+
+          const fetchNowPlaying = async () => {
+            const { access_token } = await getAccessToken();
+            const nowPlayingResponse = await fetch(NOW_PLAYING_ENDPOINT, {
+              headers: {
+                Authorization: `Bearer ${access_token}`,
+              },
+            });
+
+            if (nowPlayingResponse.status === 204 || nowPlayingResponse.status > 400) {
+              writeFileSync("public/now-playing.json", JSON.stringify({ isPlaying: false }, null, 2));
+              return;
+            }
+
+            const song = await nowPlayingResponse.json();
+            const data = {
+              albumImageUrl: song.item?.album.images[0]?.url,
+              artist: song.item?.artists.map((artist) => artist.name).join(", "),
+              isPlaying: song.is_playing,
+              songUrl: song.item?.external_urls?.spotify,
+              title: song.item?.name,
+            };
+
+            writeFileSync("public/now-playing.json", JSON.stringify(data, null, 2));
+          };
+
+          fetchNowPlaying().catch((err) => console.error(err));' > spotify.mjs
+
+              # Ejecutar el script Node.js
+              node spotify.mjs
+
+      - name: Commit and Push Changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/now-playing.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Update now-playing.json"
+            git push "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" HEAD:main
+          fi
