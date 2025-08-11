@@ -1,3 +1,7 @@
 {
-  "isPlaying": false
+  "albumImageUrl": "https://i.scdn.co/image/ab67616d0000b2736b18d0490878750cd69abf2c",
+  "artist": "Miley Cyrus",
+  "isPlaying": true,
+  "songUrl": "https://open.spotify.com/track/2y4lAQpi5VTNLu2ldeTdUH",
+  "title": "We Can't Stop"
 }
