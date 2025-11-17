@@ -1,7 +1,3 @@
 {
-  "albumImageUrl": "https://i.scdn.co/image/ab67616d0000b27340b57befa24e9fe0e888f4a1",
-  "artist": "Coldplay",
-  "isPlaying": true,
-  "songUrl": "https://open.spotify.com/track/2LTl1pU074hnzAdy0SpHAb",
-  "title": "The Scientist"
+  "isPlaying": false
 }
